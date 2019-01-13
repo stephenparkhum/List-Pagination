@@ -1,8 +1,8 @@
 /******************************************
-Treehouse Techdegree:
+Stephen Parker:
 FSJS project 2 - List Filter and Pagination
 ******************************************/
-   
+
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
 
@@ -16,9 +16,20 @@ FSJS project 2 - List Filter and Pagination
    will only be used inside of a function, then it can be locally 
    scoped to that function.
 ***/
+const pageDiv = document.getElementsByClassName("page");
+const masterUl = document.querySelector('.student-list');
+const li = document.getElementsByClassName('student-item');
+const studentList = [];
+let page = 1;
 
 
+const addStudents = (list, listTwo) => {
+   for (i = 0; i < listTwo.length; i++) {
+      list.push(listTwo[i]);
+   }
+};
 
+addStudents(studentList, li);
 
 /*** 
    Create the `showPage` function to hide all of the items in the 
@@ -35,14 +46,62 @@ FSJS project 2 - List Filter and Pagination
        "invoke" the function 
 ***/
 
+const showPage = (list, page) => {
+
+   for (let i = 0; i < list.length; i++) {
+      if (i >= 0 && i <= 10) {
+         list[i].style.display = "block";
+      } else if (i >= 11 && i <= 100) {
+         list[i].style.display = "none";
+      }
+
+   }
+};
 
 
+showPage(studentList, page);
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
 
+const appendPageLinks = (list) => {
+   const pageDiv = document.querySelector(".page");
+   const pages = list.length / 10;
+   const div = document.createElement("div");
+   div.className = "pagination";
+   masterUl.after(div);
+
+
+   const ul = document.createElement("ul");
+   div.appendChild(ul);
+
+   const pageList = [];
+
+   for (i = 0; i < pages - 1; i++) {
+      pageList.push(i);
+   }
+
+   for (i = 0; i < pageList.length; i++) {
+      let li = document.createElement("li");
+      const a = document.createElement("a");
+      ul.appendChild(li);
+      li.appendChild(a);
+
+      a.style.cursor = 'pointer';
+      a.textContent = pageList[i] + 1;
+      a.addEventListener('click', showPage(studentList, page));
+
+
+   }
+
+
+
+};
+
+
+appendPageLinks(studentList);
 
 
 
