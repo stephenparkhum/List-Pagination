@@ -20,7 +20,7 @@ const pageDiv = document.getElementsByClassName("page");
 const masterUl = document.querySelector('.student-list');
 const li = document.getElementsByClassName('student-item');
 const studentList = [];
-let page = 1;
+let page = 0;
 
 
 const addStudents = (list, listTwo) => {
@@ -47,19 +47,14 @@ addStudents(studentList, li);
 ***/
 
 const showPage = (list, page) => {
-
    for (let i = 0; i < list.length; i++) {
-      if (i >= 0 && i <= 10) {
+      if (i >= page * 10 && i <= page * 10 + 9) {
          list[i].style.display = "block";
-      } else if (i >= 11 && i <= 100) {
+      } else {
          list[i].style.display = "none";
       }
-
    }
 };
-
-
-showPage(studentList, page);
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
@@ -73,37 +68,37 @@ const appendPageLinks = (list) => {
    div.className = "pagination";
    masterUl.after(div);
 
-
    const ul = document.createElement("ul");
    div.appendChild(ul);
 
    const pageList = [];
-
-   for (i = 0; i < pages - 1; i++) {
+   for (i = 0; i < pages; i++) {
       pageList.push(i);
    }
 
-   for (i = 0; i < pageList.length; i++) {
-      let li = document.createElement("li");
+   for (let i = 0; i < pageList.length; i++) {
       const a = document.createElement("a");
+      let li = document.createElement("li");
       ul.appendChild(li);
       li.appendChild(a);
-
       a.style.cursor = 'pointer';
       a.textContent = pageList[i] + 1;
-      a.addEventListener('click', showPage(studentList, page));
-
-
+      a.addEventListener('click', function (event) {
+         page = pageList[i];
+         showPage(studentList, page);
+         event.target.classList.add('active');
+         console.log(page);
+      });
    }
 
 
 
+   // for (let i = 0; i < pageLinks.length; i++) {
+   //    pageLinks[i].addEventListener("click", console.log('squirt'), false);
+   // }
+
 };
 
-
 appendPageLinks(studentList);
-
-
-
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
