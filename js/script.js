@@ -62,6 +62,7 @@ const showPage = (list, page) => {
 ***/
 
 const appendPageLinks = (list) => {
+   showPage(studentList, 0);
    const pageDiv = document.querySelector(".page");
    const pages = list.length / 10;
    const div = document.createElement("div");
