@@ -82,19 +82,40 @@ const appendPageLinks = (list) => {
       let li = document.createElement("li");
       ul.appendChild(li);
       li.appendChild(a);
+
+      if (i === 0) {
+         a.classList.add('active');
+      }
       a.style.cursor = 'pointer';
       a.textContent = pageList[i] + 1;
-      a.addEventListener('click', function (event) {
-         page = pageList[i];
-         showPage(studentList, page);
+      // a.addEventListener('click', function (event) {
+      //    page = pageList[i];
+      //    showPage(studentList, page);
+      // });
+      // a.addEventListener('click', function (event) {
+      //    event.target.classList.add('active');
+      // });
+
+      let pageLinks = document.querySelectorAll('.pagination ul li a');
+      ul.addEventListener('click', function (event) {
+         if (event.target.tagName === 'A') {
+            for (let i = 0; i < pageLinks.length; i++) {
+               event.target.classList.remove('active');
+               page = event.target.innerText - 1;
+               
+            }
+
+            showPage(studentList, page);
+         } else if (event.target.innerText == page - 1) {
+            event.target.classList.add("active");
+         }
+
       });
-      a.addEventListener('click', function (event) {
-         event.target.classList.add('active');
-      });
+
+
    }
 
 };
-
 appendPageLinks(studentList);
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
