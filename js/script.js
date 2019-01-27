@@ -6,16 +6,6 @@ FSJS project 2 - List Filter and Pagination
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
 
-/*** 
-   Add your global variables that store the DOM elements you will 
-   need to reference and/or manipulate. 
-   
-   But be mindful of which variables should be global and which 
-   should be locally scoped to one of the two main functions you're 
-   going to create. A good general rule of thumb is if the variable 
-   will only be used inside of a function, then it can be locally 
-   scoped to that function.
-***/
 const pageDiv = document.getElementsByClassName("page");
 const masterUl = document.querySelector('.student-list');
 const li = document.getElementsByClassName('student-item');
@@ -56,10 +46,14 @@ const showPage = (list, page) => {
    }
 };
 
-/*** 
-   Create the `appendPageLinks function` to generate, append, and add 
-   functionality to the pagination buttons.
-***/
+// APPEND PAGE LINKS
+/*
+
+- 
+- 
+-
+
+*/
 
 const appendPageLinks = (list) => {
    showPage(studentList, 0);
@@ -80,21 +74,16 @@ const appendPageLinks = (list) => {
    for (let i = 0; i < pageList.length; i++) {
       const a = document.createElement("a");
       let li = document.createElement("li");
+      
       ul.appendChild(li);
       li.appendChild(a);
 
       if (i === 0) {
          a.classList.add('active');
       }
+
       a.style.cursor = 'pointer';
       a.textContent = pageList[i] + 1;
-      // a.addEventListener('click', function (event) {
-      //    page = pageList[i];
-      //    showPage(studentList, page);
-      // });
-      // a.addEventListener('click', function (event) {
-      //    event.target.classList.add('active');
-      // });
 
       let pageLinks = document.querySelectorAll('.pagination ul li a');
       ul.addEventListener('click', function (event) {
@@ -104,12 +93,8 @@ const appendPageLinks = (list) => {
                page = event.target.innerText - 1;
                
             }
-
             showPage(studentList, page);
-         } else if (event.target.innerText == page - 1) {
-            event.target.classList.add("active");
          }
-
       });
 
 
@@ -117,5 +102,3 @@ const appendPageLinks = (list) => {
 
 };
 appendPageLinks(studentList);
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
