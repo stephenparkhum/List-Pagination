@@ -91,10 +91,9 @@ const appendPageLinks = (list) => {
             for (let i = 0; i < pageLinks.length; i++) {
                event.target.classList.remove('active');
                page = event.target.innerText - 1;
-               
             }
             showPage(studentList, page);
-         }
+         } 
       });
 
 
