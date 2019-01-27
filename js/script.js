@@ -87,16 +87,11 @@ const appendPageLinks = (list) => {
       a.addEventListener('click', function (event) {
          page = pageList[i];
          showPage(studentList, page);
+      });
+      a.addEventListener('click', function (event) {
          event.target.classList.add('active');
-         console.log(page);
       });
    }
-
-
-
-   // for (let i = 0; i < pageLinks.length; i++) {
-   //    pageLinks[i].addEventListener("click", console.log('squirt'), false);
-   // }
 
 };
 
